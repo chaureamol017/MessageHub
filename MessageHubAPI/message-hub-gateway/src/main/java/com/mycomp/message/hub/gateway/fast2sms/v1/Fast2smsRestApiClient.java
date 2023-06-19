@@ -38,20 +38,29 @@ public class Fast2smsRestApiClient extends RestApiClient {
     }
 
     public RestMethod<Fast2smsOtpResponse> createOtpMethod(final Fast2smsOtpRequest request, final List<Pair<String, String>> params) {
+        return createFast2smsGetRestMethod(request, params, "o");
+    }
+
+    public RestMethod<Fast2smsOtpResponse> createPromotionalMethod(final Fast2smsOtpRequest request, final List<Pair<String, String>> params) {
+        return createFast2smsGetRestMethod(request, params, "p");
+    }
+
+//    public RestMethod<Fast2smsOtpResponse> createTransactionalMethod(final Fast2smsOtpRequest request, final List<Pair<String, String>> params) {
+//        return createFast2smsGetRestMethod(request, params, "t");
+//    }
+
+    private RestMethod<Fast2smsOtpResponse> createFast2smsGetRestMethod(Fast2smsOtpRequest request, List<Pair<String, String>> params, String route) {
         final String endpoint = getServiceEndpoint("");
 
-        final RestMethod<Fast2smsOtpResponse> methodForPost = createRestMethodForGet(endpoint, Fast2smsOtpResponse.class);
-        methodForPost.addHeader("cache-control", "no-cache");
-        final String route = "p";
+        final RestMethod<Fast2smsOtpResponse> restMethodForGet = createRestMethodForGet(endpoint, Fast2smsOtpResponse.class);
+        restMethodForGet.addHeader("cache-control", "no-cache");
 
-
-        addParameters(params, methodForPost, route);
-
+        addParameters(params, restMethodForGet, route);
         if (request != null) {
-            methodForPost.setBodyAsJson(request);
+            restMethodForGet.setBodyAsJson(request);
         }
 
-        return methodForPost;
+        return restMethodForGet;
     }
 
     private void addParameters(List<Pair<String, String>> params, RestMethod<Fast2smsOtpResponse> methodForPost, String route) {
