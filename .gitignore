@@ -1,0 +1,5 @@
+/MessageHubAPI/message-hub-core/target/
+/MessageHubAPI/message-hub-gateway/target/
+/MessageHubAPI/message-hub-persistence/target/
+/MessageHubAPI/message-hub-data-service/target/
+/MessageHubAPI/message-hub-web/target/
