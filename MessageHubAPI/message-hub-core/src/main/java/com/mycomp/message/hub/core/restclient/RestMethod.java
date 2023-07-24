@@ -8,7 +8,7 @@ public interface RestMethod<T> {
     RestMethod<T> addParam(final String name, final Object value);
 
 
-    RestMethod<T> setBodyAsJson(final Object body);
+    RestMethod<T> setBody(final Object body);
 
     T call();
 }

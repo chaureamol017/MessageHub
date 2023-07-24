@@ -1,6 +1,4 @@
-package com.mycomp.message.hub.response;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package com.mycomp.message.hub.api.response;
 
 public class TextMessageResponse {
 

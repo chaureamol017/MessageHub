@@ -1,7 +1,7 @@
 package com.mycomp.message.hub.gateway.fast2sms.v1.adapter;
 
 import com.mycomp.message.hub.gateway.fast2sms.v1.restmodel.Fast2smsOtpResponse;
-import com.mycomp.message.hub.response.TextMessageResponse;
+import com.mycomp.message.hub.api.response.TextMessageResponse;
 
 import java.util.function.Function;
 

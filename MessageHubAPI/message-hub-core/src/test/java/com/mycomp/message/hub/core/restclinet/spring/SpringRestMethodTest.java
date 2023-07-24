@@ -123,13 +123,13 @@ public class SpringRestMethodTest {
 
     @Test
     public void setBodyAsJsonShouldReturnSameInstance() {
-        Assert.assertSame(method, method.setBodyAsJson(anyBody));
+        Assert.assertSame(method, method.setBody(anyBody));
     }
 
 
     @Test
     public void setBodyShouldSetContentTypeHeaderToJsonByDefault() {
-        method.setBodyAsJson(anyBody);
+        method.setBody(anyBody);
 
         method.call();
 
@@ -140,7 +140,7 @@ public class SpringRestMethodTest {
     @Test
     public void setBodyShouldRespectContentTypeWhenSet() {
         method.addHeader("Content-Type", "application/x-www-form-urlencoded");
-        method.setBodyAsJson(anyBody);
+        method.setBody(anyBody);
 
         method.call();
 
@@ -151,7 +151,7 @@ public class SpringRestMethodTest {
 
     @Test
     public void setBodyShouldSetBodyInHttpEntity() {
-        method.setBodyAsJson(anyBody);
+        method.setBody(anyBody);
 
         method.call();
 
@@ -162,8 +162,8 @@ public class SpringRestMethodTest {
 
     @Test
     public void duringSetupWeShouldBeAbleToChangeOurMindAndClearTheJsonBodyWithoutLeavingLeftoverJsonContentTypeInTheRequest() {
-        method.setBodyAsJson(anyBody);
-        method.setBodyAsJson(null);
+        method.setBody(anyBody);
+        method.setBody(null);
 
         method.call();
 
@@ -174,8 +174,8 @@ public class SpringRestMethodTest {
 
     @Test
     public void duringSetupWeShouldBeAbleToChangeOurMindAndClearTheJsonBodyPriorToInvokingCall() {
-        method.setBodyAsJson(anyBody);
-        method.setBodyAsJson(null);
+        method.setBody(anyBody);
+        method.setBody(null);
 
         method.call();
 

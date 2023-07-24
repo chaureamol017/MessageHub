@@ -25,7 +25,7 @@ public class SpringRestMethod<T> implements RestMethod<T> {
     private final Class<T> responseType;
     private final Map<String, String> headers;
     private final Map<String, Object> parameters;
-    private Object jsonBody;
+    private Object requestBody;
     private UriComponentsBuilder uriComponentsBuilder;
 
     public SpringRestMethod(final RestTemplate restTemplate, final HttpMethod httpMethod, final String url, final Class<T> responseType) {
@@ -51,8 +51,8 @@ public class SpringRestMethod<T> implements RestMethod<T> {
     }
 
 
-    public RestMethod<T> setBodyAsJson(final Object body) {
-        this.jsonBody = body;
+    public RestMethod<T> setBody(final Object body) {
+        this.requestBody = body;
         return this;
     }
 
@@ -111,8 +111,8 @@ public class SpringRestMethod<T> implements RestMethod<T> {
     }
 
     private void setContentType(final HttpHeaders httpHeaders) {
-        if (this.jsonBody != null) {
-            String contentType = (String) this.headers.get("Content-Type");
+        if (this.requestBody != null) {
+            String contentType = this.headers.get("Content-Type");
             if (contentType == null) {
                 httpHeaders.setContentType(MediaType.APPLICATION_JSON);
             } else {
@@ -124,7 +124,7 @@ public class SpringRestMethod<T> implements RestMethod<T> {
 
 
     private HttpEntity<?> instantiateHttpEntity(final HttpHeaders httpHeaders) {
-        return this.jsonBody != null ? new HttpEntity(this.jsonBody, httpHeaders) : new HttpEntity(httpHeaders);
+        return this.requestBody != null ? new HttpEntity(this.requestBody, httpHeaders) : new HttpEntity(httpHeaders);
     }
 
 

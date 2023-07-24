@@ -4,8 +4,7 @@ import com.mycomp.message.hub.api.RestApiClient;
 import com.mycomp.message.hub.api.request.TextMessageRequest;
 import com.mycomp.message.hub.api.response.TextMessageResponse;
 
-public abstract class OtpSender<C extends RestApiClient> {
+public abstract class TransactionalSmsSender<C extends RestApiClient> {
 
-    public abstract TextMessageResponse send(C apiClient, TextMessageRequest request);
-
+    protected abstract TextMessageResponse send(C apiClient, TextMessageRequest request);
 }

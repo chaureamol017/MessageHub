@@ -1,6 +1,6 @@
 package com.mycomp.message.hub.gateway.fast2sms.v1.adapter;
 
-import com.mycomp.message.hub.request.TextMessageRequest;
+import com.mycomp.message.hub.api.request.TextMessageRequest;
 import javafx.util.Pair;
 
 import java.io.UnsupportedEncodingException;

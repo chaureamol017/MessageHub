@@ -10,16 +10,14 @@ import javafx.util.Pair;
 
 import java.util.List;
 
-public class Fast2smsRestApiClient extends RestApiClient {
+public class Fast2smsRestApiClient extends RestApiClient<List<Pair<String, String>>, Fast2smsOtpResponse> {
     private static final String BASE_URL = "https://www.fast2sms.com/dev/bulk";
     private static final String API_VERSION = null;
     private RestMethodFactory restMethodFactory;
-    private Credentials credentials;
 
     public Fast2smsRestApiClient(final RestMethodFactory restMethodFactory, final Credentials credentials) {
-        super(BASE_URL, API_VERSION);
+        super(credentials, BASE_URL, API_VERSION);
         this.restMethodFactory = restMethodFactory;
-        this.credentials = credentials;
     }
 
     @Override
@@ -33,39 +31,36 @@ public class Fast2smsRestApiClient extends RestApiClient {
     }
 
     @Override
-    public Boolean isSeparateVersionInUrl() {
-        return false;
+    public String getVersionUrl() {
+        return "";
     }
 
-    public RestMethod<Fast2smsOtpResponse> createOtpMethod(final Fast2smsOtpRequest request, final List<Pair<String, String>> params) {
-        return createFast2smsGetRestMethod(request, params, "o");
+    public RestMethod<Fast2smsOtpResponse> createOtpMethod(final List<Pair<String, String>> params) {
+        return createFast2smsGetRestMethod(params, "o");
     }
 
-    public RestMethod<Fast2smsOtpResponse> createPromotionalMethod(final Fast2smsOtpRequest request, final List<Pair<String, String>> params) {
-        return createFast2smsGetRestMethod(request, params, "p");
+    public RestMethod<Fast2smsOtpResponse> createPromotionalMethod(final List<Pair<String, String>> params) {
+        return createFast2smsGetRestMethod(params, "p");
     }
 
-//    public RestMethod<Fast2smsOtpResponse> createTransactionalMethod(final Fast2smsOtpRequest request, final List<Pair<String, String>> params) {
-//        return createFast2smsGetRestMethod(request, params, "t");
-//    }
+    public RestMethod<Fast2smsOtpResponse> createTransactionalMethod(final List<Pair<String, String>> params) {
+        return createFast2smsGetRestMethod(params, "t");
+    }
 
-    private RestMethod<Fast2smsOtpResponse> createFast2smsGetRestMethod(Fast2smsOtpRequest request, List<Pair<String, String>> params, String route) {
+    private RestMethod<Fast2smsOtpResponse> createFast2smsGetRestMethod(List<Pair<String, String>> params, String route) {
         final String endpoint = getServiceEndpoint("");
 
-        final RestMethod<Fast2smsOtpResponse> restMethodForGet = createRestMethodForGet(endpoint, Fast2smsOtpResponse.class);
-        restMethodForGet.addHeader("cache-control", "no-cache");
+        final RestMethod<Fast2smsOtpResponse> restMethodForGet = createRestMethodForGet(endpoint, true);
+//        restMethodForGet.addHeader("cache-control", "no-cache");
 
         addParameters(params, restMethodForGet, route);
-        if (request != null) {
-            restMethodForGet.setBodyAsJson(request);
-        }
 
         return restMethodForGet;
     }
 
     private void addParameters(List<Pair<String, String>> params, RestMethod<Fast2smsOtpResponse> methodForPost, String route) {
         String language = "english";
-        methodForPost.addParam("authorization", credentials.getApiKey());
+//        methodForPost.addParam("authorization", credentials.getApiKey());
         methodForPost.addParam("language" , language);
         methodForPost.addParam("route", route);
         params.forEach(pair -> {
