@@ -1,3 +1,6 @@
+.DS_Store
+*.iml
+.idea
 /MessageHubAPI/message-hub-core/target/
 /MessageHubAPI/message-hub-gateway/target/
 /MessageHubAPI/message-hub-persistence/target/
